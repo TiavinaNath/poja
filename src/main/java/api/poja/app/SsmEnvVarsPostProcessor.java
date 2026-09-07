@@ -33,7 +33,9 @@ public class SsmEnvVarsPostProcessor implements EnvironmentPostProcessor, Ordere
             .map(PropertySource::getName)
             .toList();
     System.out.println(
-        "SsmEnvVarsPostProcessor: rewrapping " + ssmSourceNames + " among "
+        "SsmEnvVarsPostProcessor: rewrapping "
+            + ssmSourceNames
+            + " among "
             + propertySources.stream().map(PropertySource::getName).toList());
     ssmSourceNames.forEach(
         name -> propertySources.replace(name, asSystemEnvironment(propertySources.get(name))));

@@ -41,8 +41,7 @@ public class EnvVarsProbeController {
   }
 
   @GetMapping("/env-vars-probe")
-  public Map<String, Object> probe(
-      @RequestParam(defaultValue = "POJA_PROBE_VALUE") String name) {
+  public Map<String, Object> probe(@RequestParam(defaultValue = "POJA_PROBE_VALUE") String name) {
     String dotted = name.toLowerCase(Locale.ROOT).replace('_', '.');
     Map<String, Object> report = new LinkedHashMap<>();
     report.put("probedUpper", name);
@@ -53,8 +52,7 @@ public class EnvVarsProbeController {
     report.put("getProperty(dotted)", describe(environment.getProperty(dotted)));
     report.put("@Value(${POJA_PROBE_VALUE})", describe(nullIfUnresolved(upperViaValue)));
     report.put("@Value(${poja.probe.value})", describe(nullIfUnresolved(dottedViaValue)));
-    report.put(
-        "spring.datasource.url", describe(environment.getProperty("spring.datasource.url")));
+    report.put("spring.datasource.url", describe(environment.getProperty("spring.datasource.url")));
     report.put("propertySources", propertySourceNames());
     return report;
   }
