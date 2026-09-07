@@ -1,7 +1,8 @@
-package api.java.app;
+package api.poja.app;
 
 import io.awspring.cloud.parameterstore.ParameterStorePropertySource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.EnvironmentPostProcessor;
@@ -31,6 +32,9 @@ public class SsmEnvVarsPostProcessor implements EnvironmentPostProcessor, Ordere
             .filter(ParameterStorePropertySource.class::isInstance)
             .map(PropertySource::getName)
             .toList();
+    System.out.println(
+        "SsmEnvVarsPostProcessor: rewrapping " + ssmSourceNames + " among "
+            + propertySources.stream().map(PropertySource::getName).toList());
     ssmSourceNames.forEach(
         name -> propertySources.replace(name, asSystemEnvironment(propertySources.get(name))));
   }
