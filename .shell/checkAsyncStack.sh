@@ -1,5 +1,5 @@
 sudo apt-get install jq
-export API_URL_SSM="`aws ssm get-parameter --name /bnwconvert-6c7ee0a2/$1/api/url`"
+export API_URL_SSM="`aws ssm get-parameter --name /bnwconvert-37c9f665/$1/api/url`"
 export API_URL=`echo $API_URL_SSM | jq -r '.Parameter.Value'`
 created_uuids=$(curl --fail -X GET "$API_URL$2")
 sleep 90
